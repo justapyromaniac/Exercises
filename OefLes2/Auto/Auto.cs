@@ -8,7 +8,7 @@ namespace OefLes2
 {
     class Auto
     {
-        //Properties start
+        #region "Properties"
 
         public string Merk { get; set; }
 
@@ -20,8 +20,9 @@ namespace OefLes2
 
         public Persoon Eigenaar { get; set; }
 
-        //Properties end
-        //Constructors start
+        #endregion "Properties"
+
+        #region "Constructors"
 
         //Constructor om een volledige auto aan te maken
         public Auto(string merk, string type, string nummerplaat, int aantalKilometers, Persoon eigenaar)
@@ -45,8 +46,11 @@ namespace OefLes2
 
         }
 
-        //Constructors end
-        //Methods start
+        #endregion "Constructors"
+
+        #region "Methodes"
+
+        #region "Methodes AantalKilometers"
 
         public int BerekenKilometers(int jaren)
         {
@@ -62,12 +66,20 @@ namespace OefLes2
             return BerekenKilometers(jaren);
         }
 
-        //Methods end
+        #endregion "Methodes AantalKilometers"
+
+        //gewoon een andere ToString() eigenlijk
+        public string GeefAuto()
+        {
+            return $"{Merk} {Type} met nummerplaat {Nummerplaat}";
+        }
 
         public override string ToString()
         {
+            //die GeefNaam() Methode bevind zich in persoon en dient om encapsulatie in stand te houden
             return $"De auto met {Nummerplaat} heeft {AantalKilometers} kilometers en is van {Eigenaar.GeefNaam()}.";
         }
 
+        #endregion "Methodes"
     }
 }

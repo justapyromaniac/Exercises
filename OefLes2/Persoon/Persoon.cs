@@ -8,8 +8,8 @@ namespace OefLes2
 {
     class Persoon
     {
-        //Properties start
-        //THERE ARE 2 GENDERS
+        #region "Properties en fields"
+
         public enum Geslachten
         {
             Man, Vrouw
@@ -25,11 +25,11 @@ namespace OefLes2
         public Vlucht Vlucht { get; set; }
 
         //Geen contructor om een persoon met autos te maken, dit wordt behandeld met methodes
-        //op deze manier heeft elke persoon een lege lijst van autos
-        public List<Auto> Autos { get; set; } = new List<Auto>();
+        public List<Auto> Autos { get; }
 
-        //Properties end
-        //Constructors start
+        #endregion "Properties en fields"
+
+        #region "Constructors"
 
         //Basic alles input constructor voor slechts een persoon
         public Persoon(string naam, string voornaam, DateTime geboorteDatum, Geslachten geslacht)
@@ -38,6 +38,8 @@ namespace OefLes2
             Voornaam = voornaam;
             GeboorteDatum = geboorteDatum;
             Geslacht = geslacht;
+            //op deze manier heeft elke persoon een lege lijst van autos
+            Autos = new List<Auto>();
         }
 
         //Constructor voor een passagier
@@ -58,9 +60,11 @@ namespace OefLes2
 
         }
 
-        //Constructors end
-        //Methods start
-            //Methods Persoon start
+        #endregion Constructors"
+
+        #region "Methodes"
+
+        #region "Methodes Persoon"
 
         public int BerekenLeeftijd(DateTime datum)
         {
@@ -83,12 +87,46 @@ namespace OefLes2
         {
             return $"{Voornaam} {Naam}";
         }
-            //Methods persoon end
-            //Methods autos start   
+
+        #endregion "Methodes Persoon"
+
+        #region "Methodes autos"
+
+        public string GeefAutos()
+        {
+            StringBuilder output = new StringBuilder();
+            if (Autos.Count != 0)
+            {
+                output.AppendLine("Deze persoon heeft de volgende autos: ");
+                foreach (Auto auto in Autos)
+                {
+                    output.AppendLine($"een {auto.GeefAuto()}");
+                }
+            }
+            else
+            {
+                output.AppendLine("Deze persoon heeft geen autos");
+            }
+            return output.ToString();
+        }
+
+        public Auto VindAuto(Auto input)
+        {
+            Auto output = null;
+            foreach (Auto auto in Autos)
+            {
+                if(auto == input)
+                {
+                    output = auto;
+                }
+            }
+            return output;
+        }
 
         //Deze methodes dienen om de lijst van autos te veranderen
         public bool VoegAutoToe(Auto auto)
         {
+            //geen check ofdat een auto al in de lijst zit, als ze 2 teslas willen dan mag dat
             if(auto != null)
             {
                 Autos.Add(auto);
@@ -101,14 +139,20 @@ namespace OefLes2
         {
             if(auto != null)
             {
-                Autos.Remove(auto);
-                return true;
+                if(Autos.Contains(auto))
+                {
+                    Autos.Remove(auto);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             return false;
         }
 
-            //Methods autos end
-        //Methods end
+        #endregion "Methodes autos"
 
         public override string ToString()
         {
@@ -117,18 +161,15 @@ namespace OefLes2
             //Een check of de persoon een passagier is en/of de persoon autos heeft
             if (Vlucht != null)
             {
-                output.AppendLine($"en vliegt op vlucht {Vlucht.Vluchtnummer} van {Vlucht.VertrekPlaats} naar {Vlucht.BestemmingPlaats}.");
+                output.AppendLine($"en vliegt op vlucht {Vlucht.GeefVlucht()}");
             }
             if(Autos.Count != 0)
             {
-                output.AppendLine("Deze persoon heeft de volgende autos: ");
-                foreach(Auto auto in Autos)
-                {
-                    output.AppendLine($"een {auto.Merk} {auto.Type} met nummerplaat {auto.Nummerplaat}");
-                }
-                
+                output.AppendLine(GeefAutos());
             }
             return output.ToString();
         }
+
+        #endregion "Methodes"
     }
 }

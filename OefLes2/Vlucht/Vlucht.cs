@@ -8,7 +8,7 @@ namespace OefLes2
 {
     class Vlucht
     {
-        //Properties start
+        #region "Properties en fields"
 
         //enums zijn mini klassen, dus met hoofdletter. 
         public enum Bestemmingen { Frankrijk, Engeland, Duitsland }
@@ -30,11 +30,11 @@ namespace OefLes2
         public DateTime AankomstTijd { get; set; }
 
         //Geen contructor om een vlucht met passagiers te maken, dit wordt behandeld met methodes
-        //op deze manier heeft elke vlucht een lege lijst van passagiers
-        public List<Persoon> Passagiers { get; set; } = new List<Persoon>();
+        public List<Persoon> Passagiers { get; }
 
-        //Properties end
-        //Constructors start
+        #endregion "Properties en fields"
+
+        #region "Constructors"
 
         //Volledige constructor om een vlucht aan te maken
         public Vlucht(Bestemmingen bestemmingPlaats, Vertrekken vertrekPlaats, DateTime vertrekTijd, DateTime aankomstTijd)
@@ -45,6 +45,8 @@ namespace OefLes2
             VertrekPlaats = vertrekPlaats;
             VertrekTijd = vertrekTijd;
             AankomstTijd = aankomstTijd;
+            //op deze manier heeft elke vlucht een lege lijst van passagiers
+            Passagiers = new List<Persoon>();
         }
 
         //constructor chaining
@@ -54,9 +56,11 @@ namespace OefLes2
 
         }
 
-        //Constructors end
-        //Methods start
-            //Methods Vlucht start
+        #endregion "Constructors"
+
+        #region "Methodes"
+
+        #region "Methodes Vlucht"
 
         //methodes hebben altijd een wekwoord in de naam
         public string BerekenVluchtduur()
@@ -66,8 +70,14 @@ namespace OefLes2
             return $"De vlucht duurt {vluchtduur.ToString()} (d.uu-mm-ss)";
         }
 
-            //Methods Vlucht end
-            //Methods Passagiers start
+        public string GeefVlucht()
+        {
+            return $"{Vluchtnummer} van {VertrekPlaats} naar {BestemmingPlaats}";
+        }
+
+        #endregion "Methodes Vlucht"
+
+        #region "Methodes Passagiers"
 
         //Deze methodes dienen om de lijst van passagiers te veranderen
         public bool VoegPassagierToe(Persoon passagier)
@@ -115,8 +125,7 @@ namespace OefLes2
             return output.ToString();
         }
 
-            //Methods Passagiers end
-        //Methods end
+        #endregion "Methodes Passagiers"
 
         public override string ToString()
         {
@@ -124,13 +133,11 @@ namespace OefLes2
             output.AppendLine($"Vlucht {Vluchtnummer} vliegt van {VertrekPlaats} naar {BestemmingPlaats}.");
             if(Passagiers.Count != 0)
             {
-                output.AppendLine("Op deze vlucht vliegen de volgende passagiers: ");
-                foreach(Persoon passagier in Passagiers)
-                {
-                    output.AppendLine($"{passagier.GeefNaam()}");
-                }
+                output.AppendLine($"{GeefPassagiersLijst()}");
             }
             return output.ToString(); 
         }
+
+        #endregion "Methodes"
     }
 }

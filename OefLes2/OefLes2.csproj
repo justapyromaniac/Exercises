@@ -47,18 +47,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AfkortingDictionary.cs" />
-    <Compile Include="Auto.cs" />
-    <Compile Include="Persoon.cs" />
+    <Compile Include="Afkortingen\AfkortingDictionary.cs" />
+    <Compile Include="Auto\Auto.cs" />
+    <Compile Include="Persoon\Persoon.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vliegveld.cs" />
-    <Compile Include="Vlucht.cs" />
+    <Compile Include="Vlucht\Vliegveld.cs" />
+    <Compile Include="Vlucht\Vlucht.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
