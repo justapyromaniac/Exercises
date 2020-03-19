@@ -21,12 +21,12 @@ namespace OefLes3
             const int MINIMUM = 1;
             const int MAXIMUM = 6;
 
-            #region "Objecten toevoegen"
-
             Console.WriteLine("------ Oef 3.1 ------");
             Console.WriteLine();
 
             #region "Films"
+
+            #region "Objecten toevoegen"
 
             Media film1 = Film.MaakRandomMedia();
             Media film2 = Film.MaakRandomMedia();
@@ -44,96 +44,7 @@ namespace OefLes3
             Console.WriteLine(film4);
             Console.WriteLine();
 
-            #endregion "Films"
-
-            #region "Serie"
-
-            Media serie1 = Serie.MaakRandomMedia();
-            Media serie2 = Serie.MaakRandomMedia();
-            Media serie3 = Serie.MaakRandomMedia();
-            Media serie4 = Serie.MaakRandomMedia();
-
-            Console.WriteLine("----- Series -----");
-            Console.WriteLine();
-
-            Console.WriteLine("----- Series aanmaken -----");
-            Console.WriteLine();
-            Console.WriteLine(serie1);
-            Console.WriteLine(serie2);
-            Console.WriteLine(serie3);
-            Console.WriteLine(serie4);
-            Console.WriteLine();
-          
-
-            #endregion "Serie"
-
-            #region "IMBD"
-
-            IMBD imbd = new IMBD();
-            Console.WriteLine("------ IMBD -----");
-            Console.WriteLine();
-
-            Console.WriteLine("----- Lijst films tonen -----");
-            Console.WriteLine();
-            Console.WriteLine(imbd.GeefFilms());
-            Console.WriteLine();
-
-            Console.WriteLine("----- Films toevoegen -----");
-            Console.WriteLine();
-            Console.WriteLine(imbd.VoegFilmToe(film1));
-            Console.WriteLine(imbd.VoegFilmToe(film2));
-            Console.WriteLine(imbd.VoegFilmToe(film3));
-            Console.WriteLine(imbd.VoegFilmToe(film4));
-            Console.WriteLine();
-
-            Console.WriteLine("----- Lijst films tonen -----");
-            Console.WriteLine();
-            Console.WriteLine(imbd.GeefFilms());
-            Console.WriteLine();
-
-            Console.WriteLine("----- Lijst series tonen -----");
-            Console.WriteLine();
-            Console.WriteLine(imbd.GeefSeries());
-            Console.WriteLine();
-
-            Console.WriteLine("----- Series toevoegen -----");
-            Console.WriteLine();
-            Console.WriteLine(imbd.VoegSerieToe(serie1));
-            Console.WriteLine(imbd.VoegSerieToe(serie2));
-            Console.WriteLine(imbd.VoegSerieToe(serie3));
-            Console.WriteLine(imbd.VoegSerieToe(serie4));
-            Console.WriteLine();
-
-            Console.WriteLine("----- Lijst series tonen -----");
-            Console.WriteLine();
-            Console.WriteLine(imbd.GeefSeries());
-            Console.WriteLine();
-
-            Console.WriteLine("----- Volledige IMBD tonen -----");
-            Console.WriteLine();
-            Console.WriteLine(imbd);
-            Console.WriteLine();
-
-            #endregion "IMBD"
-
             #endregion "Objecten toevoegen"
-
-            #region "Methodes testen"
-
-            #region "Test film"
-
-            Console.WriteLine("----- Testen van methodes Films -----");
-            Console.WriteLine();
-
-            Console.WriteLine("----- Lijst films -----");
-            Console.WriteLine();
-            Console.WriteLine(imbd.GeefFilms());
-            Console.WriteLine();
-
-            Console.WriteLine("----- Opzoeken film -----");
-            Console.WriteLine();
-            Console.WriteLine(imbd.VindFilm(film1));
-            Console.WriteLine();
 
             #region "Ratings"
 
@@ -235,26 +146,29 @@ namespace OefLes3
 
             #endregion "Acteurs"
 
-            imbd.VerwijderFilm(film1);
-            Console.WriteLine("----- Film verwijderen -----");
-            Console.WriteLine();
-            Console.WriteLine(imbd.GeefFilms());
+            #endregion "Films"
+
+            #region "Serie"
+
+            #region "Objecten toevoegen"
+
+            Media serie1 = Serie.MaakRandomMedia();
+            Media serie2 = Serie.MaakRandomMedia();
+            Media serie3 = Serie.MaakRandomMedia();
+            Media serie4 = Serie.MaakRandomMedia();
+
+            Console.WriteLine("----- Series -----");
             Console.WriteLine();
 
-            #endregion "Test film"
+            Console.WriteLine("----- Series aanmaken -----");
+            Console.WriteLine();
+            Console.WriteLine(serie1);
+            Console.WriteLine(serie2);
+            Console.WriteLine(serie3);
+            Console.WriteLine(serie4);
+            Console.WriteLine();
 
-            #region "Test serie"
-
-            Console.WriteLine("----- Testen van methodes Series -----");
-            Console.WriteLine();
-            Console.WriteLine("----- Lijst series -----");
-            Console.WriteLine();
-            Console.WriteLine(imbd.GeefSeries());
-            Console.WriteLine();
-            Console.WriteLine("----- Opzoeken serie -----");
-            Console.WriteLine();
-            Console.WriteLine(imbd.VindSerie(serie1));
-            Console.WriteLine();
+            #endregion "Objecten toevoegen"
 
             #region "Ratings"
 
@@ -354,6 +268,93 @@ namespace OefLes3
 
             #endregion "Acteurs"
 
+            #endregion "Serie"
+
+            #region "IMBD"
+
+            IMBD imbd = new IMBD();
+            Console.WriteLine("------ IMBD -----");
+            Console.WriteLine();
+
+            Console.WriteLine("----- Lijst films tonen -----");
+            Console.WriteLine();
+            Console.WriteLine(imbd.GeefFilms());
+            Console.WriteLine();
+
+            Console.WriteLine("----- Films toevoegen -----");
+            Console.WriteLine();
+            Console.WriteLine(imbd.VoegFilmToe(film1));
+            Console.WriteLine(imbd.VoegFilmToe(film2));
+            Console.WriteLine(imbd.VoegFilmToe(film3));
+            Console.WriteLine(imbd.VoegFilmToe(film4));
+            Console.WriteLine();
+
+            Console.WriteLine("----- Lijst films tonen -----");
+            Console.WriteLine();
+            Console.WriteLine(imbd.GeefFilms());
+            Console.WriteLine();
+
+            Console.WriteLine("----- Lijst series tonen -----");
+            Console.WriteLine();
+            Console.WriteLine(imbd.GeefSeries());
+            Console.WriteLine();
+
+            Console.WriteLine("----- Series toevoegen -----");
+            Console.WriteLine();
+            Console.WriteLine(imbd.VoegSerieToe(serie1));
+            Console.WriteLine(imbd.VoegSerieToe(serie2));
+            Console.WriteLine(imbd.VoegSerieToe(serie3));
+            Console.WriteLine(imbd.VoegSerieToe(serie4));
+            Console.WriteLine();
+
+            Console.WriteLine("----- Lijst series tonen -----");
+            Console.WriteLine();
+            Console.WriteLine(imbd.GeefSeries());
+            Console.WriteLine();
+
+            Console.WriteLine("----- Volledige IMBD tonen -----");
+            Console.WriteLine();
+            Console.WriteLine(imbd);
+            Console.WriteLine();
+
+            #endregion "IMBD"
+
+            #region "Test film"
+
+            Console.WriteLine("----- Testen van methodes Films -----");
+            Console.WriteLine();
+
+            Console.WriteLine("----- Lijst films -----");
+            Console.WriteLine();
+            Console.WriteLine(imbd.GeefFilms());
+            Console.WriteLine();
+
+            Console.WriteLine("----- Opzoeken film -----");
+            Console.WriteLine();
+            Console.WriteLine(imbd.VindFilm(film1));
+            Console.WriteLine();
+
+            imbd.VerwijderFilm(film1);
+            Console.WriteLine("----- Film verwijderen -----");
+            Console.WriteLine();
+            Console.WriteLine(imbd.GeefFilms());
+            Console.WriteLine();
+
+            #endregion "Test film"
+
+            #region "Test serie"
+
+            Console.WriteLine("----- Testen van methodes Series -----");
+            Console.WriteLine();
+            Console.WriteLine("----- Lijst series -----");
+            Console.WriteLine();
+            Console.WriteLine(imbd.GeefSeries());
+            Console.WriteLine();
+            Console.WriteLine("----- Opzoeken serie -----");
+            Console.WriteLine();
+            Console.WriteLine(imbd.VindSerie(serie1));
+            Console.WriteLine();
+
             imbd.VerwijderSerie(serie1);
             Console.WriteLine("----- Serie verwijderen -----");
             Console.WriteLine();
@@ -361,8 +362,6 @@ namespace OefLes3
             Console.WriteLine();
 
             #endregion "Test serie"
-
-            #endregion "Methodes testen"
 
             #endregion "Oef 3.1"
 

@@ -61,7 +61,7 @@ namespace OefLes3
             }
             else
             {
-                output.Append("De lijst van ratings is leeg");
+                output.Append("Deze films heeft geen ratings");
             }
             return output.ToString();
         }
@@ -191,12 +191,6 @@ namespace OefLes3
         }
 
         #endregion "Methodes acteurs"
-
-        //abstracte methode, dit zal je zien bij inheritance
-        public static Media MaakRandomMedia()
-        {
-            return null;
-        }
 
         public override string ToString()
         {

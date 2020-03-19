@@ -62,11 +62,19 @@ namespace OefLes3
 
         public bool VoegFilmToe(Media input)
         {
-            if(Films.Count != 0)
+            if(input != null)
             {
-                if (Films.Contains(input))
+                if (Films.Count != 0)
                 {
-                    return false;
+                    if (Films.Contains(input))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        Films.Add((Film)input);
+                        return true;
+                    }
                 }
                 else
                 {
@@ -76,19 +84,26 @@ namespace OefLes3
             }
             else
             {
-                Films.Add((Film)input);
-                return true;
+                throw new ArgumentNullException();
             }
+            
         }
 
         public bool VerwijderFilm(Media input)
         {
-            if(Films.Count != 0)
+            if (input != null)
             {
-                if (Films.Contains(input))
+                if (Films.Count != 0)
                 {
-                    Films.Remove((Film)input);
-                    return true;
+                    if (Films.Contains(input))
+                    {
+                        Films.Remove((Film)input);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
@@ -97,7 +112,7 @@ namespace OefLes3
             }
             else
             {
-                return false;
+                throw new ArgumentNullException();
             }
         }
 
@@ -139,15 +154,23 @@ namespace OefLes3
         {
             if(input != null)
             {
-                if (Series.Contains(input))
+                if(Series.Count != 0)
                 {
-                    return false;
+                    if (Series.Contains(input))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        Series.Add((Serie)input);
+                        return true;
+                    }
                 }
                 else
                 {
                     Series.Add((Serie)input);
                     return true;
-                }
+                }              
             }  
             else
             {
@@ -159,10 +182,17 @@ namespace OefLes3
         {
             if(input != null)
             {
-                if (Series.Contains(input))
+                if(Series.Count != 0)
                 {
-                    Series.Remove((Serie)input);
-                    return true;
+                    if (Series.Contains(input))
+                    {
+                        Series.Remove((Serie)input);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {

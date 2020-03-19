@@ -25,7 +25,7 @@ namespace OefLes3
 
         #region "Methodes"
 
-        public new static Media MaakRandomMedia()
+        public static Media MaakRandomMedia()
         {
             List<string> titels = new List<string>
             {
