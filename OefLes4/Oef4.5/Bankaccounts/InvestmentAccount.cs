@@ -13,6 +13,11 @@ namespace OefLes4.Oef4._5
 
         }
 
+        public InvestmentAccount()
+        {
+
+        }
+
         #region "Withdraw methods"
 
         public override Transaction WithdrawMoney(decimal money, DateTime date)
@@ -35,7 +40,7 @@ namespace OefLes4.Oef4._5
                     }
                     else
                     {
-                        Transaction output = new Transaction(date, money - (money * 2), TransactionLog.Count + 1);
+                        Transaction output = new Transaction(date, money - (money * 2));
                         AddTransaction(output);
                         CalculateAccountBalance();
                         return output;
@@ -67,7 +72,7 @@ namespace OefLes4.Oef4._5
             {
                 if (date != null)
                 {
-                    Transaction output = new Transaction(date, money, TransactionLog.Count + 1);
+                    Transaction output = new Transaction(date, money);
                     AddTransaction(output);
                     CalculateAccountBalance();
                     return output;
@@ -98,7 +103,7 @@ namespace OefLes4.Oef4._5
             {
                 if (date != null)
                 {
-                    Transaction output = new Investment(date, money, TransactionLog.Count + 1, investmentPeriod);
+                    Transaction output = new Investment(date, money, investmentPeriod);
                     AddTransaction(output);
                     CalculateAccountBalance();
                     return output;

@@ -322,6 +322,17 @@ namespace OefLes4
             #endregion "Testing methods"
 
             #endregion "Exercise 4.4"
+
+            BankAccount test = new SavingsAccount(DateTime.Today, 0.01M, 0.1M);
+            test.DepositMoney(100, DateTime.Today.AddYears(-2));
+            test.DepositMoney(100, DateTime.Today.AddDays(-4));
+            test.DepositMoney(100, DateTime.Today.AddDays(-3));
+            test.DepositMoney(100, DateTime.Today.AddDays(-2));
+            test.DepositMoney(100, DateTime.Today.AddDays(-1));
+            test.DepositMoney(100);
+            Console.WriteLine(test);
+
+            Console.WriteLine(typeof(SavingsAccount));
         }
     }
 }

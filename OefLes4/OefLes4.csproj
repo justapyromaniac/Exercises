@@ -58,11 +58,13 @@
     <Compile Include="Oef4.4\Festival.cs" />
     <Compile Include="Oef4.4\Person.cs" />
     <Compile Include="Oef4.5\Address.cs" />
-    <Compile Include="Oef4.5\BankAccount.cs" />
+    <Compile Include="Oef4.5\Bank.cs" />
+    <Compile Include="Oef4.5\Bankaccounts\BankAccount.cs" />
+    <Compile Include="Oef4.5\Bankaccounts\SavingsAccount.cs" />
     <Compile Include="Oef4.5\Customer.cs" />
-    <Compile Include="Oef4.5\Investment.cs" />
-    <Compile Include="Oef4.5\InvestmentAccount.cs" />
-    <Compile Include="Oef4.5\Transaction.cs" />
+    <Compile Include="Oef4.5\Transactions\Investment.cs" />
+    <Compile Include="Oef4.5\Bankaccounts\InvestmentAccount.cs" />
+    <Compile Include="Oef4.5\Transactions\Transaction.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

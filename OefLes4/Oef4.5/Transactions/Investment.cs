@@ -10,7 +10,7 @@ namespace OefLes4.Oef4._5
     {
         public TimeSpan InvestmentPeriod { get; private set; }
 
-        public Investment(DateTime transactionDate, decimal transactionValue, int transactionNumber, TimeSpan investmentPeriod) : base(transactionDate, transactionValue, transactionNumber)
+        public Investment(DateTime transactionDate, decimal transactionValue, TimeSpan investmentPeriod) : base(transactionDate, transactionValue)
         {
             InvestmentPeriod = investmentPeriod;
         }

@@ -8,15 +8,16 @@ namespace OefLes4.Oef4._5
 {
     class Transaction
     {
+        private static int CounterTransactions = 1;
         public int TransactionNumber { get; private set; }
 
         public DateTime TransactionDate { get; private set; }
 
         public decimal TransactionValue { get; private set; }
 
-        public Transaction(DateTime transactionDate, decimal transactionValue, int transactionNumber)
+        public Transaction(DateTime transactionDate, decimal transactionValue)
         {
-            TransactionNumber = transactionNumber;
+            TransactionNumber = CounterTransactions++;
             TransactionDate = transactionDate;
             TransactionValue = transactionValue;
         }

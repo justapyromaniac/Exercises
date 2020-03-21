@@ -31,6 +31,11 @@ namespace OefLes4.Oef4._5
             IsOpen = true;
         }
 
+        public BankAccount()
+        {
+
+        }
+
         #region "TransactionLog methods"
 
         public string ListTransactions()
@@ -38,7 +43,7 @@ namespace OefLes4.Oef4._5
             StringBuilder output = new StringBuilder();
             if(TransactionLog.Count != 0)
             {
-                output.AppendLine("Transactions: ");
+                output.AppendLine("Transactions: \n");
                 foreach (Transaction transaction in TransactionLog)
                 {
                     output.AppendLine($"{transaction}");
@@ -88,7 +93,7 @@ namespace OefLes4.Oef4._5
             }
             else
             {
-                throw new ArgumentException();
+                throw new Exception("Please input a valid transaction");
             }
         }
 
@@ -115,7 +120,7 @@ namespace OefLes4.Oef4._5
             }
             else
             {
-                throw new ArgumentException();
+                throw new Exception("please input a valid transaction");
             }
         }
 
@@ -129,7 +134,7 @@ namespace OefLes4.Oef4._5
             {
                 if (date != null)
                 {
-                    Transaction output = new Transaction(date, money, TransactionLog.Count + 1);
+                    Transaction output = new Transaction(date, money);
                     AddTransaction(output);
                     CalculateAccountBalance();
                     return output;
@@ -167,7 +172,7 @@ namespace OefLes4.Oef4._5
                     }
                     else
                     {
-                        Transaction output = new Transaction(date, money - (money * 2), TransactionLog.Count + 1);
+                        Transaction output = new Transaction(date, money - (money * 2));
                         AddTransaction(output);
                         CalculateAccountBalance();
                         return output;
@@ -193,7 +198,7 @@ namespace OefLes4.Oef4._5
 
         #region "Calculate balance methods"
 
-        public virtual decimal CalculateAccountBalance(DateTime date)
+        public decimal CalculateAccountBalance(DateTime date)
         {
             if (date != null)
             {
@@ -214,7 +219,7 @@ namespace OefLes4.Oef4._5
             }
         }
 
-        public virtual decimal CalculateAccountBalance()
+        public decimal CalculateAccountBalance()
         {
             DateTime date = DateTime.Today;
             return CalculateAccountBalance(date);
@@ -226,14 +231,23 @@ namespace OefLes4.Oef4._5
             {
                 decimal value = 0;
                 decimal interest = 0;
-                TimeSpan amountofDays = new TimeSpan();
-                foreach (Transaction transaction in TransactionLog)
+                DateTime nextTransaction = new DateTime();
+                TimeSpan daysUntilNext = new TimeSpan();
+                for(int i = 0; i < TransactionLog.Count; i++)
                 {
-                    if (transaction.TransactionDate <= date)
+                    if (TransactionLog[i].TransactionDate <= date)
                     {
-                        value = transaction.TransactionValue;
-                        amountofDays = date - transaction.TransactionDate;
-                        interest += (((value / 100) * InterestRate) * amountofDays.Days);
+                        if(i + 1 >= TransactionLog.Count)
+                        {
+                            nextTransaction = date;
+                        }
+                        else
+                        {
+                            nextTransaction = TransactionLog[i + 1].TransactionDate;
+                            daysUntilNext = nextTransaction - TransactionLog[i].TransactionDate;
+                            value += TransactionLog[i].TransactionValue;
+                            interest += (((value / 100) * InterestRate) * daysUntilNext.Days);
+                        }  
                     }
                 }
                 return interest;
