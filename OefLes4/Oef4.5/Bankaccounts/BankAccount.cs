@@ -123,7 +123,7 @@ namespace OefLes4.Oef4._5
 
         #endregion "TransactionLog methods"
 
-        #region "Depost methods"
+        #region "Deposit methods"
 
         public virtual Transaction DepositMoney(decimal money, DateTime date)
         {
@@ -153,7 +153,7 @@ namespace OefLes4.Oef4._5
             return DepositMoney(money, date);
         }
 
-        #endregion "Depost methods"
+        #endregion "Deposit methods"
 
         #region "Withdraw methods"
 
