@@ -8,6 +8,8 @@ namespace OefLes4.Oef4._5
 {
     class Transaction
     {
+        public static Random generator = new Random();
+
         private static int CounterTransactions = 1;
         public int TransactionNumber { get; private set; }
 

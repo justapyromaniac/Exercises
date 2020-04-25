@@ -8,6 +8,8 @@ namespace OefLes4.Oef4._5
 {
      abstract class BankAccount
      {
+        public static Random generator = new Random();
+
         protected static int CounterAccounts = 1;
 
         public decimal Balance { get; protected set; }
@@ -31,29 +33,24 @@ namespace OefLes4.Oef4._5
             IsOpen = true;
         }
 
-        public BankAccount()
-        {
-
-        }
-
         #region "TransactionLog methods"
 
         public string ListTransactions()
         {
-            StringBuilder output = new StringBuilder();
-            if(TransactionLog.Count != 0)
+            if(TransactionLog.Count == 0)
             {
+                return "There are no transactions for this account";
+            }
+            else
+            {
+                StringBuilder output = new StringBuilder();
                 output.AppendLine("Transactions: \n");
                 foreach (Transaction transaction in TransactionLog)
                 {
                     output.AppendLine($"{transaction}");
                 }
+                return output.ToString();
             }
-            else
-            {
-                output.AppendLine("There are no transactions for this account");
-            }
-            return output.ToString();
         }
 
         public Transaction FindTransaction(int transactionNumber)
@@ -198,7 +195,7 @@ namespace OefLes4.Oef4._5
 
         #region "Calculate balance methods"
 
-        public decimal CalculateAccountBalance(DateTime date)
+        public virtual decimal CalculateAccountBalance(DateTime date)
         {
             if (date != null)
             {
@@ -211,7 +208,7 @@ namespace OefLes4.Oef4._5
                     }
                 }
                 Balance = (output + CalculateInterest(date));
-                return Balance;
+                return Math.Round(Balance, 2, MidpointRounding.ToEven);
             }
             else
             {
@@ -219,7 +216,7 @@ namespace OefLes4.Oef4._5
             }
         }
 
-        public decimal CalculateAccountBalance()
+        public virtual decimal CalculateAccountBalance()
         {
             DateTime date = DateTime.Today;
             return CalculateAccountBalance(date);
@@ -245,9 +242,8 @@ namespace OefLes4.Oef4._5
                         {
                             nextTransaction = TransactionLog[i + 1].TransactionDate;
                             daysUntilNext = nextTransaction - TransactionLog[i].TransactionDate;
-                            value += TransactionLog[i].TransactionValue;
-                            interest += (((value / 100) * InterestRate) * daysUntilNext.Days);
-                        }  
+                        }
+                        interest += (((value / 100) * InterestRate) * daysUntilNext.Days);
                     }
                 }
                 return interest;
@@ -313,16 +309,26 @@ namespace OefLes4.Oef4._5
 
         #endregion "Account status methods"
 
-
         public override string ToString()
         {
             StringBuilder output = new StringBuilder();
             output.AppendLine($"Account number: {AccountNumber:'BE'000000}");
             output.AppendLine($"{GetAccountStatus()}");
             output.AppendLine($"This account was opened on: {OpenAccountDate:yyyy-MM-dd}");
-            output.AppendLine($"The account balance total is: \u20AC {CalculateAccountBalance():#0.00}");
+            output.AppendLine($"The account balance total is: \u20AC {CalculateAccountBalance():N}");
             output.AppendLine($"The interest rate on this account is: {InterestRate:P}");
-            output.AppendLine($"\n{ListTransactions()}");
+            if(TransactionLog.Count != 0)
+            {
+                output.AppendLine("Transactions: \n");
+                foreach (Transaction transaction in TransactionLog)
+                {
+                    output.AppendLine($"{transaction.TransactionNumber}");
+                }
+            }
+            else
+            {
+                output.AppendLine("This account has no transactions");
+            }
             return output.ToString();
         }
     }

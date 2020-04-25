@@ -13,6 +13,7 @@ namespace OefLes4
 {
     class Program
     {
+        static Random generator = new Random();
         static void Main(string[] args)
         {
             #region "Exercise 4.1"
@@ -190,11 +191,7 @@ namespace OefLes4
             Console.WriteLine("----- Removing the product -----");
             Console.WriteLine();
 
-            Console.WriteLine(store.RemoveProduct(product1));
-            Console.WriteLine();
-
-            Console.WriteLine("----- Displaying the store -----");
-            Console.WriteLine();
+            store.RemoveProduct(product1);
             Console.WriteLine(store);
 
             #endregion "Testing methods"
@@ -273,8 +270,8 @@ namespace OefLes4
             Console.WriteLine("----- Removing the artist -----");
             Console.WriteLine();
 
-            Console.WriteLine(festival.RemoveArtist(artist1));
-            Console.WriteLine();
+            festival.RemoveArtist(artist1);
+            Console.WriteLine(festival);
 
             Console.WriteLine("----- Adding attendees -----");
             Console.WriteLine();
@@ -312,27 +309,295 @@ namespace OefLes4
             Console.WriteLine("----- Removing the attendee -----");
             Console.WriteLine();
 
-            Console.WriteLine(festival.RemoveAttendee(attendee1));
-            Console.WriteLine();
-
-            Console.WriteLine("----- Displaying the festival -----");
-            Console.WriteLine();
+            festival.RemoveAttendee(attendee1);
             Console.WriteLine(festival);
 
             #endregion "Testing methods"
 
             #endregion "Exercise 4.4"
 
-            BankAccount test = new SavingsAccount(DateTime.Today, 0.01M, 0.1M);
-            test.DepositMoney(100, DateTime.Today.AddYears(-2));
-            test.DepositMoney(100, DateTime.Today.AddDays(-4));
-            test.DepositMoney(100, DateTime.Today.AddDays(-3));
-            test.DepositMoney(100, DateTime.Today.AddDays(-2));
-            test.DepositMoney(100, DateTime.Today.AddDays(-1));
-            test.DepositMoney(100);
-            Console.WriteLine(test);
+            #region "Exercise 4.5"
 
-            Console.WriteLine(typeof(SavingsAccount));
+            Console.WriteLine("----- Exercise 4.5 -----");
+            Console.WriteLine();
+
+            #region "Initializing objects"
+
+            Console.WriteLine("----- Class Customer -----");
+            Console.WriteLine();
+
+            Console.WriteLine("----- Initializing customers -----");
+            Console.WriteLine();
+
+            const int AMOUNT5 = 10;
+
+            List<Customer> customers = new List<Customer>();
+
+            //Creating the customers
+            for (int i = 0; i < AMOUNT5; i++)
+            {
+                customers.Add(Customer.MakeRandomCustomer());
+            }
+
+            const int AMOUNTOFACCOUNTS = 4;
+            int randomNumber = generator.Next(0, 2);
+            //adding bankaccounts to the customers
+            foreach (Customer customer in customers)
+            {
+                for (int j = 0; j < AMOUNTOFACCOUNTS; j++)
+                {
+                    //to randomize what account is added
+                    //adds a savingsaccount
+                    if (randomNumber <= 0)
+                    {
+                        customer.AddBankAccount(SavingsAccount.MakeRandomAccount());
+                    }
+                    //adds an investementaccount
+                    else if (randomNumber > 0)
+                    {
+                        customer.AddBankAccount(InvestmentAccount.MakeRandomAccount());
+                    }
+                }
+            }
+
+            const int AMOUNTOFTRANSACTIONS = 6;
+
+            foreach (Customer customer in customers)
+            {
+                foreach (BankAccount bankAccount in customer.BankAccounts)
+                {
+                    int randomYear = generator.Next(DateTime.Today.Year - 80, DateTime.Today.Year + 1);
+                    int randomMonth = generator.Next(1, 13);
+                    int randomDay = generator.Next(1, DateTime.DaysInMonth(randomYear, randomMonth) + 1);
+                    DateTime randomDate = new DateTime(randomYear, randomMonth, randomDay);
+                    decimal randomValue = (decimal)generator.Next(100, 100000) / 100;
+                    for (int k = 0; k < AMOUNTOFTRANSACTIONS; k++)
+                    {
+                        if (bankAccount.GetType() == typeof(SavingsAccount))
+                        {
+                            bankAccount.DepositMoney(randomValue, randomDate);
+                        }
+                        else if (bankAccount.GetType() == typeof(InvestmentAccount))
+                        {
+                            if (randomNumber <= 0)
+                            {
+                                bankAccount.DepositMoney(randomValue, randomDate);
+                            }
+                            else if (randomNumber > 0)
+                            {
+                                TimeSpan randomPeriod = new TimeSpan(generator.Next(30, 1826), 0, 0, 0);
+                                ((InvestmentAccount)bankAccount).InvestMoney(randomValue, randomPeriod, randomDate);
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (Customer customer in customers)
+            {
+                Console.WriteLine(customer);
+            }
+
+            Console.WriteLine("----- Class Bank -----");
+            Console.WriteLine();
+
+            Console.WriteLine("----- Initializing bank -----");
+            Console.WriteLine();
+
+            Bank bank = new Bank("A bank", Address.MakeRandomAddress());
+            Console.WriteLine(bank);
+
+            #endregion "Initializing objects"
+
+            #region "Testing methods"
+
+            Console.WriteLine("----- Testing methods -----");
+            Console.WriteLine();
+
+            Console.WriteLine("----- Adding customers -----");
+            Console.WriteLine();
+
+            foreach (Customer customer in customers)
+            {
+                bank.AddCustomer(customer);
+            }
+            Console.WriteLine(bank);
+
+            Console.WriteLine("----- Listing customers -----");
+            Console.WriteLine();
+
+            Console.WriteLine(bank.ListCustomers());
+
+            Console.WriteLine("----- Finding a customer -----");
+            Console.WriteLine();
+
+            Customer customer1 = bank.FindCustomer(1);
+            Console.WriteLine(customer1);
+
+            Console.WriteLine("----- Removing a customer -----");
+            Console.WriteLine();
+
+            bank.RemoveCustomer(customer1);
+            Console.WriteLine(bank);
+
+            Console.WriteLine("----- Adding a customer -----");
+            Console.WriteLine();
+
+            bank.AddCustomer(customer1);
+            Console.WriteLine(bank);
+
+            Console.WriteLine("----- Listing all bankaccounts of customer 1-----");
+            Console.WriteLine();
+
+            Console.WriteLine(customer1.ListBankAccounts());
+            Console.WriteLine();
+
+            Console.WriteLine("----- Finding a bankaccount -----");
+            Console.WriteLine();
+
+            BankAccount bankAccount1 = customer1.FindBankAccount(1);
+            Console.WriteLine(bankAccount1);
+
+            Console.WriteLine("----- Removing a bankaccount -----");
+            Console.WriteLine();
+
+            customer1.RemoveBankAccount(bankAccount1);
+            Console.WriteLine(customer1);
+
+            Console.WriteLine("----- Adding a bankaccount -----");
+            Console.WriteLine();
+
+            customer1.AddBankAccount(bankAccount1);
+            Console.WriteLine(customer1);
+
+            Console.WriteLine("----- Listing all transactions of bankaccount 1 -----");
+            Console.WriteLine();
+
+            Console.WriteLine(bankAccount1.ListTransactions());
+
+            Console.WriteLine("----- Finding a transaction -----");
+            Console.WriteLine();
+
+            Transaction transaction1 = bankAccount1.FindTransaction(1);
+            Console.WriteLine(transaction1);
+
+            Console.WriteLine("----- Removing a transaction -----");
+            Console.WriteLine();
+
+            bankAccount1.RemoveTransaction(transaction1);
+            Console.WriteLine(bankAccount1);
+
+            Console.WriteLine("----- Adding a transaction -----");
+            Console.WriteLine();
+
+            bankAccount1.AddTransaction(transaction1);
+            Console.WriteLine(bankAccount1);
+
+            Console.WriteLine("----- Making a savings account -----");
+            Console.WriteLine();
+
+            SavingsAccount savingsAccount = SavingsAccount.MakeRandomAccount();
+            Console.WriteLine(savingsAccount);
+
+            Console.WriteLine("----- Depositing money to the account -----");
+            Console.WriteLine();
+
+            int AMOUNTOFDEPOSITS1 = 10;
+
+            for (int i = 0; i < AMOUNTOFDEPOSITS1; i++)
+            {
+                int randomYear = generator.Next(DateTime.Today.Year - 80, DateTime.Today.Year + 1);
+                int randomMonth = generator.Next(1, 13);
+                int randomDay = generator.Next(1, DateTime.DaysInMonth(randomYear, randomMonth) + 1);
+                DateTime randomDate = new DateTime(randomYear, randomMonth, randomDay);
+                decimal randomValue = (decimal)generator.Next(100, 100000) / 100;
+                savingsAccount.DepositMoney(randomValue, randomDate);
+            }
+
+            Console.WriteLine(savingsAccount.ListTransactions());
+            Console.WriteLine();
+            Console.WriteLine($"Account balance: \u20AC {savingsAccount.CalculateAccountBalance():N}");
+            Console.WriteLine();
+
+            Console.WriteLine("----- Withrawing money from account -----");
+            Console.WriteLine();
+
+            int AMOUNTOFWITHDRAWALS1 = 10;
+
+            try
+            {
+                for (int i = 0; i < AMOUNTOFWITHDRAWALS1; i++)
+                {
+                    int randomYear = generator.Next(DateTime.Today.Year - 80, DateTime.Today.Year + 1);
+                    int randomMonth = generator.Next(1, 13);
+                    int randomDay = generator.Next(1, DateTime.DaysInMonth(randomYear, randomMonth) + 1);
+                    DateTime randomDate = new DateTime(randomYear, randomMonth, randomDay);
+                    decimal randomValue = (decimal)generator.Next(10, 10000) / 100;
+                    savingsAccount.WithdrawMoney(randomValue, randomDate);
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Insufficient funds");
+            }
+
+            Console.WriteLine(savingsAccount.ListTransactions());
+            Console.WriteLine();
+            Console.WriteLine($"Account balance: \u20AC {savingsAccount.CalculateAccountBalance():N}");
+            Console.WriteLine();
+
+            Console.WriteLine("----- Making an investement account -----");
+            Console.WriteLine();
+
+            InvestmentAccount investmentAccount = InvestmentAccount.MakeRandomAccount();
+            Console.WriteLine(investmentAccount);
+
+            Console.WriteLine("----- Depositing money into the account -----");
+            Console.WriteLine();
+
+            int AMOUNTOFDEPOSITS2 = 5;
+
+            for (int i = 0; i < AMOUNTOFDEPOSITS2; i++)
+            {
+                int randomYear = generator.Next(DateTime.Today.Year - 80, DateTime.Today.Year + 1);
+                int randomMonth = generator.Next(1, 13);
+                int randomDay = generator.Next(1, DateTime.DaysInMonth(randomYear, randomMonth) + 1);
+                DateTime randomDate = new DateTime(randomYear, randomMonth, randomDay);
+                decimal randomValue = (decimal)generator.Next(100, 100000) / 100;
+                investmentAccount.DepositMoney(randomValue, randomDate);
+            }
+
+            Console.WriteLine(investmentAccount.ListTransactions());
+            Console.WriteLine();
+            Console.WriteLine($"Account balance: \u20AC {investmentAccount.CalculateAccountBalance():N}");
+            Console.WriteLine();
+
+
+            Console.WriteLine("----- Investing money into the account -----");
+            Console.WriteLine();
+
+            int AMOUNTOFINVESTEMENTS = 5;
+
+            for (int i = 0; i < AMOUNTOFINVESTEMENTS; i++)
+            {
+                int randomYear = generator.Next(DateTime.Today.Year - 80, DateTime.Today.Year + 1);
+                int randomMonth = generator.Next(1, 13);
+                int randomDay = generator.Next(1, DateTime.DaysInMonth(randomYear, randomMonth) + 1);
+                DateTime randomDate = new DateTime(randomYear, randomMonth, randomDay);
+                decimal randomValue = (decimal)generator.Next(100, 100000) / 100;
+                TimeSpan randomPeriod = new TimeSpan(generator.Next(30, 1826), 0, 0, 0);
+                investmentAccount.InvestMoney(randomValue, randomPeriod, randomDate);
+            }
+
+            Console.WriteLine(investmentAccount.ListTransactions());
+            Console.WriteLine();
+            Console.WriteLine($"Account balance: \u20AC {investmentAccount.CalculateAccountBalance():N}");
+            Console.WriteLine();
+
+
+            #endregion "Testing methods"
+
+            #endregion "Exercise 4.5"
         }
     }
 }

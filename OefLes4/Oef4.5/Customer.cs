@@ -8,8 +8,10 @@ namespace OefLes4.Oef4._5
 {
     class Customer
     {
+        public static Random generator = new Random();
         public enum AccountTypes { SavingsAccount, InvestementAccount }
 
+        //a dictionary to print out a proper string, enums shouldn't be used to display info
         private Dictionary<AccountTypes, string> AccountTypesStrings = new Dictionary<AccountTypes, string>
         { 
             { AccountTypes.SavingsAccount, "Savings account" },
@@ -31,52 +33,64 @@ namespace OefLes4.Oef4._5
             Name = name;
             CustomerAddress = customerAddress;
             CustomerNumber = CustomerCounter++;
+            BankAccounts = new List<BankAccount>();
         }
 
+        #region "Methods list bankaccounts"
+
+        //if else structure changed so it doesn't assign unnecessarily 
+        //if checks in a for loop to prevent 2 foreach loops
+        //this method only returns all accounts of a given type
         public string ListBankAccounts(AccountTypes type)
         {
-            StringBuilder output = new StringBuilder();
-            if (BankAccounts.Count != 0)
+            if (BankAccounts.Count == 0)
             {
-                output.AppendLine($"{AccountTypesStrings[type]}: \n");
-                if(type == AccountTypes.SavingsAccount)
-                {
-                    foreach (SavingsAccount bankAccount in BankAccounts)
-                    {
-                        output.AppendLine($"{bankAccount}");
-                    }
-                }
-                else if(type == AccountTypes.InvestementAccount)
-                {
-                    foreach (InvestmentAccount bankAccount in BankAccounts)
-                    {
-                        output.AppendLine($"{bankAccount}");
-                    }
-                }
+                return "This customer has no bank accounts";
             }
             else
             {
-                output.AppendLine("This customer has no bank accounts");
+                StringBuilder output = new StringBuilder();
+                output.AppendLine($"{AccountTypesStrings[type]}: \n");
+                foreach (BankAccount bankAccount in BankAccounts)
+                {
+                    if (type == AccountTypes.SavingsAccount)
+                    {
+                        //Checks the type of the current bankaccount vs a constant
+                        //the type will be the child class
+                        if (bankAccount.GetType() == typeof(SavingsAccount))
+                        {
+                            output.AppendLine($"{bankAccount}");
+                        }
+                    }
+                    //else if for possible future additions of accounttypes
+                    else if (type == AccountTypes.InvestementAccount)
+                    {
+                        if (bankAccount.GetType() == typeof(InvestmentAccount))
+                        {
+                            output.AppendLine($"{bankAccount}");
+                        }
+                    }
+                } 
+                return output.ToString();
             }
-            return output.ToString();
         }
 
         public string ListBankAccounts()
         {
-            StringBuilder output = new StringBuilder();
-            if (BankAccounts.Count != 0)
+            if (BankAccounts.Count == 0)
             {
+                return "This customer has no bank accounts";
+            }
+            else
+            {
+                StringBuilder output = new StringBuilder();
                 output.AppendLine("Investement accounts: \n");
                 foreach (BankAccount bankAccount in BankAccounts)
                 {
                     output.AppendLine($"{bankAccount}");
                 }
+                return output.ToString();
             }
-            else
-            {
-                output.AppendLine("This customer has no bank accounts");
-            }
-            return output.ToString();
         }
 
         public BankAccount FindBankAccount(int accountnumber)
@@ -147,14 +161,51 @@ namespace OefLes4.Oef4._5
             }
         }
 
+        #endregion "Methods list bankaccounts"
+
+        public static Customer MakeRandomCustomer()
+        {
+            List<string> lastnames = new List<string>
+            {
+                "Jones",
+                "Free",
+                "HayWood",
+                "Dooley",
+                "Jameson"
+            };
+            List<string> firstnames = new List<string>
+            {
+                "Morgan",
+                "Jack",
+                "Trevor",
+                "Brian",
+                "Peter"
+            };
+
+            string randomName = $"{firstnames[generator.Next(firstnames.Count)]} {lastnames[generator.Next(lastnames.Count)]}";
+            Address randomAddress = Address.MakeRandomAddress();
+            return new Customer(randomName, randomAddress);
+        }
+
         public override string ToString()
         {
             StringBuilder output = new StringBuilder();
-            output.AppendLine($"Customernumber: {CustomerNumber:'C'00000000}");
+            output.AppendLine($"Customer number: {CustomerNumber:'C'00000000}");
             output.AppendLine($"Name: {Name}");
-            output.AppendLine($"Address: {CustomerAddress}");
-            output.AppendLine($"{ListBankAccounts()}");
-            return base.ToString();
+            output.AppendLine($"Address: \n{CustomerAddress}");
+            if(BankAccounts.Count != 0)
+            {
+                output.AppendLine("Bank accounts: \n");
+                foreach (BankAccount bankAccount in BankAccounts)
+                {
+                    output.AppendLine($"{bankAccount.AccountNumber}");
+                }
+            }
+            else
+            {
+                output.AppendLine("This customer has no bankaccounts");
+            }
+            return output.ToString();
         }
     }
 }

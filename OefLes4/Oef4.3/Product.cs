@@ -24,7 +24,7 @@ namespace OefLes4.Oef4._3
 
         public virtual string GetSalePrice()
         {
-            return $"{Price:#0.00}";
+            return $"\u20AC {Price:#0.00}";
         }
 
         public string GetProductName()
@@ -36,7 +36,7 @@ namespace OefLes4.Oef4._3
         {
             StringBuilder output = new StringBuilder();
             output.AppendLine($"Name: {Name}");
-            output.AppendLine($"Price: \u20AC {GetSalePrice()}");
+            output.AppendLine($"Price: {GetSalePrice()}");
             output.AppendLine($"Supplier: {Supplier}");
             return output.ToString();
         }

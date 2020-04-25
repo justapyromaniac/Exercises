@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OefLes4.Oef4._4
 {
-    class Person
+    abstract class Person
     {
         public static Random generator = new Random();
         public string LastName { get; private set; }

@@ -18,24 +18,26 @@ namespace OefLes4.Oef4._5
         {
             Name = name;
             BankAddress = bankAddress;
+            Customers = new List<Customer>(); 
         }
 
         public string ListCustomers()
         {
-            StringBuilder output = new StringBuilder();
-            if(Customers.Count != 0)
+            if(Customers.Count == 0)
             {
+                return "This bank has no customers";
+            }
+            else
+            {
+                StringBuilder output = new StringBuilder();
                 output.AppendLine("Customers: \n");
                 foreach (Customer customer in Customers)
                 {
                     output.AppendLine($"{customer}");
                 }
+                return output.ToString();
             }
-            else
-            {
-                output.AppendLine($"This bank has no customers");
-            }
-            return output.ToString();
+
         }
 
         public Customer FindCustomer(int customerNumber)
@@ -111,8 +113,19 @@ namespace OefLes4.Oef4._5
             StringBuilder output = new StringBuilder();
             output.AppendLine($"Name: {Name}");
             output.AppendLine($"Address: {BankAddress}");
-            output.AppendLine($"{ListCustomers()}");
-            return base.ToString();
+            if (Customers.Count != 0)
+            {
+                output.AppendLine("Customers numbers: \n");
+                foreach (Customer customer in Customers)
+                {
+                    output.AppendLine($"Customer: {customer.CustomerNumber}");
+                }
+            }
+            else
+            {
+                output.AppendLine("This bank has no customers");
+            }
+            return output.ToString();
         }
     }
 }

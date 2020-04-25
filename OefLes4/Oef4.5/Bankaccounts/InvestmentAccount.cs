@@ -13,11 +13,6 @@ namespace OefLes4.Oef4._5
 
         }
 
-        public InvestmentAccount()
-        {
-
-        }
-
         #region "Withdraw methods"
 
         public override Transaction WithdrawMoney(decimal money, DateTime date)
@@ -125,6 +120,40 @@ namespace OefLes4.Oef4._5
         }
 
         #endregion "Invest methods"
+
+        #region "Calculate balance methods"
+
+        public override decimal CalculateAccountBalance(DateTime date)
+        {
+            return base.CalculateAccountBalance(date);
+        }
+
+        public override decimal CalculateAccountBalance()
+        {
+            return base.CalculateAccountBalance();
+        }
+
+        public override decimal CalculateInterest(DateTime date)
+        {
+            return base.CalculateInterest(date);
+        }
+
+        public override decimal CalculateInterest()
+        {
+            return base.CalculateInterest();
+        }
+
+        #endregion "Calculate balance methods"
+
+        public static InvestmentAccount MakeRandomAccount()
+        {
+            decimal randomInterest = (((decimal)generator.Next(1, 101)) / 1000M);
+            int randomYear = generator.Next(DateTime.Today.Year - 80, DateTime.Today.Year + 1);
+            int randomMonth = generator.Next(1, 13);
+            int randomDay = generator.Next(1, DateTime.DaysInMonth(randomYear, randomMonth) + 1);
+            DateTime randomDate = new DateTime(randomYear, randomMonth, randomDay);
+            return new InvestmentAccount(randomDate, randomInterest);
+        }
 
         public override string ToString()
         {

@@ -8,15 +8,27 @@ namespace OefLes4.Oef4._4
 {
     class Festival
     {
+        public enum PeopleTypes { Attendee, Artist }
+
+        private Dictionary<PeopleTypes, string> PeopeTypesStrings = new Dictionary<PeopleTypes, string>
+        {
+            { PeopleTypes.Artist, "Artist" },
+            { PeopleTypes.Attendee, "Attendee" }
+        };
+
         public string Name { get; set; }
 
         public string Location { get; set; }
 
         public DateTime Date { get; set; }
 
+        //Tnese two lists are the slower but simpler way to do it
         public List<Artist> Artists { get; }
 
         public List<Attendee> Attendees { get; }
+
+        //This one list is the harder but more efficient and faster way to do it
+        //public List<Person> People { get; set; }
 
         public Festival(string name, string location, DateTime date)
         {
@@ -25,12 +37,151 @@ namespace OefLes4.Oef4._4
             Date = date;
             Artists = new List<Artist>();
             Attendees = new List<Attendee>();
+            //People = new List<Person>();
         }
 
         public Festival() : this("A festival", "Antwerp", DateTime.Today)
         {
 
         }
+
+        //Methods for the single list
+        #region "Methods list people"
+
+        //public string ListPeople(PeopleTypes type)
+        //{
+        //    if(People.Count == 0)
+        //    {
+        //        return "There are no people coming to this festival";
+        //    }
+        //    else
+        //    {
+        //        StringBuilder output = new StringBuilder();
+        //        output.AppendLine($"{PeopeTypesStrings[type]}: \n");
+        //        for (int i = 0; i < People.Count; i++)
+        //        {
+        //            if (type == PeopleTypes.Artist)
+        //            {
+        //                //Checks the type of the current person vs a constant
+        //                //the type will be the child class
+        //                if (People[i].GetType() == typeof(Artist))
+        //                {
+        //                    output.AppendLine($"{People[i]}");
+        //                }
+        //            }
+        //            //else if for possible future additions of people
+        //            else if (type == PeopleTypes.Attendee)
+        //            {
+        //                if (People[i].GetType() == typeof(Attendee))
+        //                {
+        //                    output.AppendLine($"{People[i]}");
+        //                }
+        //            }
+        //        }
+        //        return output.ToString();
+        //    }
+        //}
+
+        //public string ListPeople()
+        //{
+        //    if (People.Count == 0)
+        //    {
+        //        return "There are no people coming to this festival";
+        //    }
+        //    else
+        //    {
+        //        StringBuilder output = new StringBuilder();
+        //        output.AppendLine($"People: \n");
+        //        foreach (Person person in People)
+        //        {
+        //            output.AppendLine($"{person}");
+        //        }
+        //        return output.ToString();
+        //    }
+        //}
+
+        //public Person FindPerson(string firstname, string lastname, PeopleTypes type)
+        //{
+        //    string fullName = $"{firstname} {lastname}";
+        //    Person output = null;
+        //    foreach(Person person in People)
+        //    {
+        //        if (type == PeopleTypes.Artist)
+        //        {
+        //            if (person.GetPersonName() == fullName)
+        //            {
+        //                output = person;
+        //            }
+        //        }
+        //        else if (type == PeopleTypes.Attendee)
+        //        {
+        //            if (person.GetPersonName() == fullName)
+        //            {
+        //                output = person;
+        //            }
+        //        }
+        //    }
+        //    return output;
+        //}
+
+        //public bool AddPerson(Person input)
+        //{
+        //    if(input != null)
+        //    {
+        //        if(People.Count != 0)
+        //        {
+        //            if(People.Contains(input))
+        //            {
+        //                return false;
+        //            }
+        //            else
+        //            {
+        //                People.Add(input);
+        //                return true;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            People.Add(input);
+        //            return true;
+        //        }
+        //    }
+        //    else
+        //    {
+
+        //        throw new Exception("Please input a valid person");
+        //    }
+        //}
+
+        //public bool RemovePerson(Person input)
+        //{
+        //    if (input != null)
+        //    {
+        //        if (People.Count != 0)
+        //        {
+        //            if (People.Contains(input))
+        //            {
+        //                People.Add(input);
+        //                return true;
+        //            }
+        //            else
+        //            {
+        //                return false;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    else
+        //    {
+
+        //        throw new Exception("Please input a valid person");
+        //    }
+        //}
+
+        #endregion
 
         #region "Methods List artist"
 
