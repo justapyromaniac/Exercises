@@ -37,18 +37,18 @@ namespace OefLes4.Oef4._5
                         else
                         {
                             nextTransaction = TransactionLog[i + 1].TransactionDate;
-                            daysUntilNext = nextTransaction - TransactionLog[i].TransactionDate;
-                            if(daysUntilNext.Days > 0)
+                        }
+                        daysUntilNext = nextTransaction - TransactionLog[i].TransactionDate;
+                        if (daysUntilNext.Days > 0)
+                        {
+                            if (TransactionLog[i].TransactionValue > 0)
                             {
-                                if(TransactionLog[i].TransactionValue > 0)
+                                value += TransactionLog[i].TransactionValue;
+                                if ((daysUntilNext.Days / 365) > 0)
                                 {
-                                    value += TransactionLog[i].TransactionValue;
-                                    if ((daysUntilNext.Days / 365) > 0)
-                                    {
-                                        interest += (((value / 100) * FidelityInterestRate) * (daysUntilNext.Days / 365));
-                                    }
-                                    interest += (((value / 100) * InterestRate) * daysUntilNext.Days);
+                                    interest += (((value / 100) * FidelityInterestRate) * (daysUntilNext.Days / 365));
                                 }
+                                interest += (((value / 100) * InterestRate) * daysUntilNext.Days);
                             }
                         }
                     }

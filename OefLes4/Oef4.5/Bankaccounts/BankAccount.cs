@@ -241,9 +241,16 @@ namespace OefLes4.Oef4._5
                         else
                         {
                             nextTransaction = TransactionLog[i + 1].TransactionDate;
-                            daysUntilNext = nextTransaction - TransactionLog[i].TransactionDate;
                         }
-                        interest += (((value / 100) * InterestRate) * daysUntilNext.Days);
+                        daysUntilNext = nextTransaction - TransactionLog[i].TransactionDate;
+                        if (daysUntilNext.Days > 0)
+                        {
+                            if (TransactionLog[i].TransactionValue > 0)
+                            {
+                                value += TransactionLog[i].TransactionValue;
+                                interest += (((value / 100) * InterestRate) * daysUntilNext.Days);
+                            }
+                        }
                     }
                 }
                 return interest;
