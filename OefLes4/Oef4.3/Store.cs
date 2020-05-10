@@ -31,20 +31,21 @@ namespace OefLes4.Oef4._3
 
         public string DisplayProducts()
         {
-            StringBuilder output = new StringBuilder();
+            
             if(Products.Count != 0)
             {
+                StringBuilder output = new StringBuilder();
                 output.AppendLine("This store sells: ");
                 foreach (Product product in Products)
                 {
                     output.AppendLine($"{product}");
                 }
+                return output.ToString();
             }
             else
             {
-                output.AppendLine("The list of products is empty");
+                return "The list of products is empty";
             }
-            return output.ToString();
         }
 
         public Product FindProduct(string productName)
