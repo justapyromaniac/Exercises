@@ -21,15 +21,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMBD", "IMBD\IMBD.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Garage", "Sportscar\Garage.csproj", "{57DED8C9-CE9E-47DD-A29C-C307E882EB14}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Polymorphisme", "Polymorphisme", "{D82EF0AA-FEEE-499D-9A7B-66262B5E9199}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Polymorphism", "Polymorphism", "{D82EF0AA-FEEE-499D-9A7B-66262B5E9199}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fabrics", "Stoffen\Fabrics.csproj", "{3DE90FCD-6BA0-4DA6-BDD6-DD77F12F02B5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Excpetions", "Excpetions", "{66F04427-25BF-4E14-97BF-9E0B777E6D5D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Numbers", "Numbers\Numbers.csproj", "{C3C139CF-19E5-4FC0-880E-9C72D4020736}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Numbers", "Numbers\Numbers.csproj", "{C3C139CF-19E5-4FC0-880E-9C72D4020736}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TooYoung", "TooYoung\TooYoung.csproj", "{F9B504CA-7C37-4314-96D0-2BFD7A4875CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TooYoung", "TooYoung\TooYoung.csproj", "{F9B504CA-7C37-4314-96D0-2BFD7A4875CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetirementHomeActivities", "RetirementHomeActivities\RetirementHomeActivities.csproj", "{F2D9F5DE-91CA-4024-9C49-BEC90286A61C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +83,10 @@ Global
 		{F9B504CA-7C37-4314-96D0-2BFD7A4875CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9B504CA-7C37-4314-96D0-2BFD7A4875CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9B504CA-7C37-4314-96D0-2BFD7A4875CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2D9F5DE-91CA-4024-9C49-BEC90286A61C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2D9F5DE-91CA-4024-9C49-BEC90286A61C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2D9F5DE-91CA-4024-9C49-BEC90286A61C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2D9F5DE-91CA-4024-9C49-BEC90286A61C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
